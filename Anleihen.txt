@@ -1,0 +1,196 @@
+# Anleihen: PRAKTISCHES BEWERTUNGSFRAMEWORK FÜR UNTERNEHMENSANLEIHEN
+
+## Vorbereitung: Datenquellen & Tools
+
+**Ziel:** Alle relevanten Informationen beschaffen.
+**Quellen:**
+
+* *Börsenportale:* Börse Frankfurt, Stuttgart, Onvista, Finanzen.net
+* *Emittentenwebseite / Investor Relations:* Jahresberichte, Zwischenberichte
+* *Ratingagenturen:* Moody’s, S&P, Fitch
+* *Bloomberg, Refinitiv, Morningstar* (für professionelle Nutzer)
+
+**Notwendige Basisdaten:**
+
+* ISIN / WKN
+* Emittent (Unternehmen)
+* Nennwert, Laufzeit, Kupon, Kurs (aktueller Marktpreis)
+* Rating (sofern vorhanden)
+
+---
+
+## Renditeberechnung (Ertragsseite)
+
+**Ziel:** Effektive Jahresrendite bis Fälligkeit (Yield to Maturity, YTM) bestimmen.
+
+**Formel (vereinfacht):**
+[
+YTM \approx \frac{Kupon + \frac{(Nennwert - Kurs)}{Laufzeit}}{\frac{(Nennwert + Kurs)}{2}}
+]
+
+**Bewertung:**
+
+| Kriterium                         | Interpretation                                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| < Staatsanleihe gleicher Laufzeit | zu geringe Prämie – uninteressant                                                                                |
+| +1–2 % Spread                     | solide Rendite für Investment Grade                                                                              |
+| >3 % Spread                       | höheres Risiko, prüfen ob gerechtfertigt und Vergleich mit Aktien‑/Cash‑Renditen bei gleichem Risiko durchführen |
+
+**Vergleichslogik:** Vergleiche den erwarteten *Total Return* dieser Anleihe mit alternativen Anlageklassen (z. B. Aktien oder Cash) unter Annahme vergleichbarer Risikoprofile, um Opportunitätskosten und Risikoaufschläge besser einschätzen zu können.
+
+---
+
+## Bonitätsprüfung (Risiko des Emittenten)
+
+**Ziel:** Kreditwürdigkeit einschätzen.
+
+### a) Rating-Agenturen
+
+| Rating          | Kategorie                           | Interpretation              |
+| --------------- | ----------------------------------- | --------------------------- |
+| AAA–A           | sehr gut                            | sehr geringes Ausfallrisiko |
+| BBB             | Investment Grade                    | moderates Risiko            |
+| BB–B            | Non-Investment Grade („High Yield“) | erhöhtes Risiko             |
+| CCC oder tiefer | spekulativ                          | Ausfall möglich             |
+
+### b) Wenn kein Rating vorhanden:
+
+Berechne eigene **Finanzstabilitätskennzahlen** aus Geschäftsbericht:
+
+| Kennzahl                    | Formel                                          | Richtwert                    |
+| --------------------------- | ----------------------------------------------- | ---------------------------- |
+| **Debt/EBITDA**             | Gesamtschulden / EBITDA                         | < 3 = solide, > 5 = kritisch |
+| **Interest Coverage Ratio** | EBIT / Zinsaufwand                              | > 4 = komfortabel            |
+| **Current Ratio**           | Umlaufvermögen / kurzfristige Verbindlichkeiten | > 1,2 = ok                   |
+| **Free Cash Flow**          | Operativer CF – Investitionen                   | dauerhaft positiv = stabil   |
+
+**Bewertung (0–5 Punkte pro Kennzahl)**
+→ z. B. 5 Punkte bei sehr stabilen Werten, 0 Punkte bei extremen Risiken.
+Summe = Bonitätsscore (max. 20 Punkte)
+
+**Schwellenwert-Begründung:** Orientiere dich an Moody’s/S&P-Benchmarks oder CFA-Standards; falls abweichend → Unsicherheitsvermerk.
+
+---
+
+## Branchen- und Geschäftsrisiko
+
+**Ziel:** Nachhaltigkeit des Geschäftsmodells bewerten.
+
+| Prüffrage                                                                             | Bewertung                                      |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Ist das Geschäftsmodell zyklisch (z. B. Bau, Auto)?                                   | Ja = -1 Punkt                                  |
+| Ist das Unternehmen stark reguliert oder monopolartig (z. B. Energie, Infrastruktur)? | Ja = +1 Punkt                                  |
+| Wie ist der Trend des EBITDA der letzten 3 Jahre?                                     | steigend = +2 / stagnierend = 0 / fallend = -2 |
+| Diversifizierte Märkte & stabile Nachfrage?                                           | Ja = +1 / Nein = -1                            |
+
+→ **Sektor-Risiko-Score (max. 5 Punkte)**
+
+---
+
+## Marktpreis- & Zinsrisiko (Duration)
+
+**Ziel:** Sensitivität gegenüber Zinsänderungen abschätzen.
+
+**Faustregel:**
+
+> Kursänderung ≈ -Duration × Zinsänderung
+
+Beispiel:
+
+* Duration = 6 → 1 % Zinsanstieg = ca. 6 % Kursverlust.
+* Kurze Duration = geringeres Risiko.
+
+**Bewertung:**
+
+| Duration  | Risikobewertung     |
+| --------- | ------------------- |
+| < 3 Jahre | niedrig (+2 Punkte) |
+| 3–6 Jahre | mittel (0 Punkte)   |
+| > 6 Jahre | hoch (-2 Punkte)    |
+
+---
+
+## Liquidität & Handelbarkeit
+
+**Ziel:** Verkaufbarkeit der Anleihe bewerten.
+
+| Prüffrage                                                          | Bewertung |
+| ------------------------------------------------------------------ | --------- |
+| Wird die Anleihe regelmäßig gehandelt (Börse Frankfurt/Stuttgart)? | Ja = +1   |
+| Geld/Brief-Spanne < 1 %?                                           | Ja = +1   |
+| Emissionsvolumen > 250 Mio €?                                      | Ja = +1   |
+| Kleine Privatplatzierung (< 100 Mio €)?                            | -1        |
+
+→ **Liquiditätsscore (max. 3 Punkte)**
+
+---
+
+## Sicherheitsstruktur
+
+**Ziel:** Klären, was im Ausfallfall passiert.
+
+| Typ                       | Beschreibung                                     | Risikoeinstufung |
+| ------------------------- | ------------------------------------------------ | ---------------- |
+| **Senior Secured**        | besicherte Anleihe (z. B. Immobilien, Maschinen) | niedrig          |
+| **Senior Unsecured**      | unbesicherte Anleihe, vorrangig                  | mittel           |
+| **Subordinated / Hybrid** | nachrangig, ähnelt Eigenkapital                  | hoch             |
+
+**Bewertung:**
++2 Punkte (besichert), 0 Punkte (unbesichert), -2 Punkte (nachrangig)
+
+---
+
+## Unsicherheiten & Edge Cases
+
+**Ziel:** Umgang mit atypischen oder komplexen Anleiheformen regeln.
+
+Für Sonderformen wie **Zero Bonds, Wandelanleihen, Floating Rate Notes, Hybridanleihen oder Delistings** gilt:
+
+> Wenn atypisch → erkläre, warum das Standardmodell nicht anwendbar ist, und beschreibe die relevanten Unsicherheiten (z. B. illiquide Märkte, variabler Kupon, hybride Kapitalstruktur, eingeschränkte Datenverfügbarkeit).
+
+**Hinweis:** In diesen Fällen sind Kennzahlen- und Spreadvergleiche nur eingeschränkt aussagekräftig. Verwende qualitative Einschätzungen (Emittentenstabilität, Markttransparenz, Rückzahlungsstruktur) und markiere die Analyse als „eingeschränkt belastbar“.
+
+---
+
+## Gesamtbewertung (Scoring-Modell)
+
+| Kategorie                 | Punkte             |
+| ------------------------- | ------------------ |
+| Bonität                   | 0–20               |
+| Branchen-/Geschäftsrisiko | 0–5                |
+| Duration/Zinsrisiko       | -2 bis +2          |
+| Liquidität                | 0–3                |
+| Sicherheitsstruktur       | -2 bis +2          |
+| **Gesamt**                | **max. 32 Punkte** |
+
+**Ergebnisformat:** Ausgabe immer als tabellarische Übersicht plus kurze qualitative Einschätzung (z.B. *Bonität solide, Duration hoch, Empfehlung: neutral*).
+
+---
+
+### Interpretation:
+
+| Punkte | Bewertung  | Empfehlung                    |
+| ------ | ---------- | ----------------------------- |
+| 26–32  | Sehr stark | Kaufwürdig bei Spread ≥ 1,5 % |
+| 20–25  | Solide     | Halten oder selektiv kaufen   |
+| 15–19  | Grenzfall  | Nur mit hohem Spread (> 3 %)  |
+| < 15   | Schwach    | Vermeiden / zu riskant        |
+
+---
+
+## Zusatzschritt: Szenarioanalyse
+
+**Ziel:** Robustheit testen.
+
+* **Zinsanstieg um 1 %:** Kursverlust ≈ Duration × 1 %.
+* **Downgrade um eine Ratingstufe:** typischer Kursverlust 3–5 %.
+* **Rezessionsszenario:** Prüfe, ob Free Cash Flow negativ werden könnte.
+
+→ Wenn du auch unter diesen Szenarien eine akzeptable Rendite (> 3 %) erreichst → robustes Investment.
+
+---
+
+## Fazit
+
+Ein *gutes Investment* bei Unternehmensanleihen bedeutet **nicht** nur einen hohen Kupon, sondern **eine adäquate Rendite pro Einheit Risiko**.
+Das Framework erlaubt dir, diese Relation strukturiert zu bewerten – quantitativ (Zahlen, Kennziffern) und qualitativ (Branche, Geschäftsmodell).

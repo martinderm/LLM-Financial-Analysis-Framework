@@ -1,0 +1,110 @@
+# 📊 Bewertungs-Framework Fair Value für Aktien
+
+Zur Modellwahl: Wende das **Industrie-/Standardaktienmodell** an, wenn das Umsatzwachstum des Unternehmens im 3-Jahres-Mittel unter ca. 10% liegt und die Cashflows stabil positiv sind. Liegt das Umsatzwachstum über 10%, besteht eine hohe Innovationsquote oder ein signifikanter Anteil an immateriellen Vermögenswerten (z. B. Software, Plattformmodelle), wird automatisch das **Tech-/Wachstumsaktienmodell** verwendet. In Grenzfällen kann eine kombinierte Bewertungsmatrix eingesetzt werden, die gewichtet zwischen beiden Modellen vermittelt.
+
+## 1. Industrie-/Standardaktie
+
+(geeignet für reife, konjunkturabhängige Unternehmen)
+
+| Kategorie                   | Gewichtung | Bewertungskriterien (Beispiele)                                                                             |
+| --------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------- |
+| **Fundamentaldaten**        | **40%**   | Gewinn- und Cashflow-Entwicklung (15 %), Bilanzstabilität & Verschuldung (15 %), Dividendenfähigkeit (10 %) |
+| **Bewertungsmethoden**      | **35%**   | DCF-Analyse (20 %), Peer-Multiples (10 %), Substanzwert (5 %)                                               |
+| **Branche & Marktstellung** | **15%**   | Marktanteile, Wettbewerbsvorteile, Innovationsfähigkeit                                                     |
+| **Makro & ESG-Faktoren**    | **10%**   | Zinsen, Inflation, Regulierung, Nachhaltigkeit                                                              |
+
+**Ergebnis-Interpretation:**
+
+* Ein fairer Wert liegt im **Bewertungskorridor**, den DCF & Multiples ergeben.
+* Bilanz- und Cashflow-Kriterien sind stark gewichtet, weil Stabilität entscheidend ist.
+
+---
+
+## 2. Tech-/Wachstumsaktie
+
+(geeignet für schnell wachsende, innovationsgetriebene Unternehmen)
+
+| Kategorie                    | Gewichtung | Bewertungskriterien (Beispiele)                                                                            |
+| ---------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- |
+| **Wachstum & Marktstellung** | **45%**   | Umsatz- & Gewinnwachstum (25 %), R&D & Innovationskraft (10 %), Wettbewerbsvorteile/Netzwerkeffekte (10%) |
+| **Bewertungsmethoden**       | **30%**   | DCF auf Wachstumsszenarien (20 %), Peer-Multiples (10 %)                                                   |
+| **Fundamentaldaten**         | **15%**   | Free Cashflow-Entwicklung (10 %), Verschuldung & Liquidität (5 %)                                          |
+| **Makro & ESG-Faktoren**     | **10%**   | Regulierung (z. B. Datenschutz, KI), Nachhaltigkeit, geopolitische Risiken                                 |
+
+**Ergebnis-Interpretation:**
+
+* Gewicht liegt klar auf Wachstum und Marktstellung.
+* Klassische Kennzahlen wie KGV oder Dividende sind oft weniger aussagekräftig.
+* Ein „Fair Value“ wird über Szenarien (optimistisch, Basis, pessimistisch) abgebildet.
+
+---
+
+## 3. Praxis-Umsetzung
+
+1. **Daten sammeln** → Geschäftsberichte, Analysten-Consensus, Branchenvergleiche.
+2. **Bewertungsmatrix erstellen** → Kategorien mit Punkten 1–5 bewerten.
+3. **Gewichtung anwenden** → gewichteten Score/Fair-Value-Korridor berechnen.
+4. **Marktpreis abgleichen** → Kurs < Fair Value = potenziell unterbewertet, Kurs > Fair Value = potenziell überbewertet.
+5. **Datenstandardisierung** → Verwende folgende Konventionen:
+
+   * **Bewertungsstichtag**: Gib immer den Stichtag der verwendeten Daten an (z. B. Quartalsende oder letzter Handelstag, lokale Zeitzone Europe/Vienna).
+   * **Währungsformat**: Standardmäßig in **EUR**, zusätzlich Originalwährung mit Quellenangabe des Wechselkurses (z. B. EZB, Refinitiv, Yahoo Finance).
+   * **Quellenzitat**: Bei externen Daten nenne Quelle, Datum und Link (z. B. „Quelle: Unternehmensbericht FY2024, veröffentlicht am 15.03.2025“).
+6. **Edge Cases**
+
+   * Behandle Sonderfälle wie **Spin-offs, Dual-Class-Shares, Negative Earnings oder Unternehmensrestrukturierungen** mit dem im Hauptprompt definierten Edge-Case-Mechanismus.
+   * Erkläre, warum Standardkennzahlen hier nicht anwendbar sind, und liefere stattdessen qualitative Einschätzungen, Unsicherheitswarnungen oder Anpassungslogiken.
+   * Verweise bei Bedarf auf zusätzliche Quellen (z. B. Unternehmensmitteilungen, Analystenkommentare) zur Kontextvalidierung.
+
+   ## **Zahlenformat**: Zwei Dezimalstellen, Tausendertrennzeichen dünn, einheitliche Darstellung über alle Bewertungen.
+
+---
+
+# Dividenden
+
+Ob eine Dividendenausschüttung **nachhaltig** ist, hängt davon ab, ob das Unternehmen sie auch in Zukunft regelmäßig bedienen kann, ohne seine finanzielle Stabilität oder Wachstumschancen zu gefährden.
+Man prüft dabei im Wesentlichen **4 Dimensionen**:
+
+---
+
+## 1. **Ertrags- und Cashflow-Deckung**
+
+* **Payout Ratio (Gewinn-Ausschüttungsquote)**: Liegt sie dauerhaft deutlich über 70–80 %, ist das kritisch. Ideal sind 30–60 %, basierend auf gängigen Finanzmarktreferenzen (z. B. Damodaran, CFA Institute Benchmarks, Morningstar Dividend Sustainability Studies). Diese Schwellenwerte spiegeln branchenübliche Richtwerte für nachhaltige Ausschüttungen wider.
+* **Cashflow-Payout-Ratio**: Noch wichtiger ist, ob die Dividende durch den **operativen Cashflow** gedeckt ist.
+* **Free-Cashflow-Entwicklung**: Negativer oder schwacher Free Cashflow über mehrere Jahre = Warnsignal.
+
+---
+
+## 2. **Bilanz- und Verschuldungssituation**
+
+* **Verschuldungsgrad (Debt/Equity, Net Debt/EBITDA)**: Hohe Schulden schmälern die Fähigkeit, Dividenden in Krisenzeiten zu zahlen.
+* **Zinsdeckung (EBIT/Zinsaufwand)**: Eine solide Zinsdeckung (> 5x) gibt Sicherheit.
+* **Liquiditätsreserven**: Hoher Cash-Bestand = Puffer für Dividendenkontinuität.
+
+---
+
+## 3. **Stabilität des Geschäftsmodells**
+
+* **Konjunkturabhängigkeit**: Zyklische Branchen (z. B. Autos, Stahl) sind anfälliger für Dividendenkürzungen.
+* **Marktstellung & Wettbewerbsvorteile**: Unternehmen mit Preissetzungsmacht (z. B. Nestlé, Microsoft) haben nachhaltigere Ausschüttungen.
+* **Branchencharakter**: Versorger, Basiskonsumgüter, Pharma = stabilere Dividenden. Tech- und Wachstumsfirmen zahlen oft gar keine oder riskantere Dividenden.
+
+---
+
+## 4. **Dividendenhistorie & Managementpolitik**
+
+* **Track Record**: „Dividend Aristocrats“ (25 Jahre ununterbrochene Steigerung) gelten als sehr verlässlich.
+* **Politik & Strategie**: Klare Ausschüttungsziele („progressive Dividend Policy“) sind vertrauenswürdiger als rein opportunistische Zahlungen.
+* **Ad-hoc-Sonderdividenden**: oft Zeichen für Überschuss, aber nicht nachhaltig.
+
+---
+
+### **Kombinierter Praxis-Check (Kurzform):**
+
+1. Payout Ratio < 60 %
+2. Free Cashflow positiv und deckt Dividende
+3. Verschuldung moderat (Net Debt/EBITDA < 3)
+4. Branche stabil, Cashflows wenig zyklisch
+5. Historie: keine Kürzungen in Krisenjahren
+
+Wenn diese Punkte erfüllt sind, ist die Wahrscheinlichkeit hoch, dass eine Dividende **nachhaltig** ist.
